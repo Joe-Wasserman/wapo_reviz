@@ -22,13 +22,13 @@ This is a quick re-visualization of a much-maligned plot from [the Washington Po
 
 ```{r}
 dat <- tribble(
-  ~Population,              ~PoliticalOrientation,              ~Percent,
-  "Total population",       "Democrats/leaning independents",   43,
-  "Total population",       "Republicans/leaning independents", 41,
-  "Unvaccinated (October)", "Democrats/leaning independents",   17,
-  "Unvaccinated (October)", "Republicans/leaning independents", 60,
-  "Unvaccinated (April)",   "Democrats/leaning independents",   36,
-  "Unvaccinated (April)",   "Republicans/leaning independents", 42
+  ~Population,                ~PoliticalOrientation,              ~Percent,
+  "Total population",         "Democrats/leaning independents",   43,
+  "Total population",         "Republicans/leaning independents", 41,
+  "Unvaccinated\nin October", "Democrats/leaning independents",   17,
+  "Unvaccinated\nin October", "Republicans/leaning independents", 60,
+  "Unvaccinated\nin April",   "Democrats/leaning independents",   36,
+  "Unvaccinated\nin April",   "Republicans/leaning independents", 42
   ) %>% 
   mutate(
     PercentLabel = Percent,
@@ -51,7 +51,7 @@ g <- dat  %>%
   )
 
 g +
-  geom_col() +
+  geom_col(width = .8) +
   geom_text(
     data = subset(
       dat, 
@@ -74,21 +74,25 @@ g +
   ggtitle("Who are the unvaccinated?") +
   theme_minimal() +
   theme(
+    aspect.ratio = .5,
     axis.title = element_blank(),
     axis.text.x = element_blank(),
     panel.grid = element_blank(),
     legend.direction = "vertical",
-    legend.position = c(1.125, .98),
+    legend.position = c(1.02, 1.05),
     legend.title = element_blank(),
-    legend.text = element_text(size = 10),
-    axis.text.y = element_text(size = 12),
-    plot.title = element_text(size = 14, face = "bold", hjust = 0)
+    legend.text = element_text(size = 12),
+    axis.text.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 20, face = "bold", hjust = 0)
   )
 ```
 
-* Compared to their prevalence in the overall US population, Democrats/leaning independents are **under-represented** among the unvaccinated--and even moreso in October than in April 2021.
+Compared to their prevalence in the overall US population:
 
-* Compared to their prevalence in the overall US population, Republicans/leaning independents are **over-represented** among the unvaccinated as of October, 2021.
+  * Democrats/leaning independents are **under-represented** among the unvaccinated
+  
+  * Republicans/leaning independents are **over-represented** among the unvaccinated
+
 
 ```{r}
 sessionInfo()
