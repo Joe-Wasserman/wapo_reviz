@@ -1,15 +1,5 @@
----
-title: "Revisualization of Partisan Divide in Unvaccinated (US)"
-author: "Joe A. Wasserman"
-date: "11/18/2021"
-output: 
-  html_document:
-    keep_md: true
----
 
-
-
-This is a quick re-visualization of a much-maligned plot from [the Washington Post](https://www.washingtonpost.com/politics/2021/11/16/party-divide-vaccination/) using Kaiser Family Foundation polling data.
+This is a quick re-visualization of a much-maligned plot from [the Washington Post](/README_files/PUP6SZ3SIZEGNPXBNVZ3SEEZ6Q.png){width=50%} using Kaiser Family Foundation polling data.
 
 
 ```r
@@ -83,10 +73,6 @@ g +
 * Compared to their prevalence in the overall US population, Democrats/leaning independents are **under-represented** among the unvaccinated--and even moreso in October than in April 2021.
 
 * Compared to their prevalence in the overall US population, Republicans/leaning independents are **over-represented** among the unvaccinated as of October, 2021.
-
-The original plot:
-
-![Who are the unvaccinated? Visualization from Washington Post](https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/PUP6SZ3SIZEGNPXBNVZ3SEEZ6Q.png&w=916)
 
 
 ```r
