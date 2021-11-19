@@ -1,0 +1,100 @@
+---
+title: "Revisualization of Partisan Divide in Unvaccinated (US)"
+author: "Joe A. Wasserman"
+date: "11/18/2021"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  dpi = 300
+)
+
+```
+
+This is a quick re-visualization of a much-maligned plot from [the Washington Post](https://www.washingtonpost.com/politics/2021/11/16/party-divide-vaccination/) using Kaiser Family Foundation polling data.
+
+```{r}
+dat <- tribble(
+  ~Population,              ~PoliticalOrientation,              ~Percent,
+  "Total population",       "Democrats/leaning independents",   43,
+  "Total population",       "Republicans/leaning independents", 41,
+  "Unvaccinated (October)", "Democrats/leaning independents",   17,
+  "Unvaccinated (October)", "Republicans/leaning independents", 60,
+  "Unvaccinated (April)",   "Democrats/leaning independents",   36,
+  "Unvaccinated (April)",   "Republicans/leaning independents", 42
+  ) %>% 
+  mutate(
+    PercentLabel = Percent,
+    Percent = if_else(
+      PoliticalOrientation == "Democrats/leaning independents",
+      Percent * -1,
+      Percent
+    )
+  )
+
+g <- dat  %>% 
+  ggplot(
+    aes(
+      x = Percent,
+      y = Population,
+      fill = PoliticalOrientation,
+      color = PoliticalOrientation,
+      label = scales::percent(PercentLabel, scale = 1, accuracy = 1)
+    )
+  )
+
+g +
+  geom_col() +
+  geom_text(
+    data = subset(
+      dat, 
+      PoliticalOrientation == "Democrats/leaning independents"
+    ),
+    color = "white",
+    hjust = 0
+  ) +
+  geom_text(
+    data = subset(
+      dat, 
+      PoliticalOrientation == "Republicans/leaning independents"
+    ),
+    color = "white",
+    hjust = 1
+  ) +
+  scale_fill_manual(values = c("#2E74C0", "#CB454A")) +
+  scale_color_manual(values = c("#2E74C0", "#CB454A")) +
+  scale_y_discrete(limits = rev, position = "right") +
+  ggtitle("Who are the unvaccinated?") +
+  theme_minimal() +
+  theme(
+    axis.title = element_blank(),
+    axis.text.x = element_blank(),
+    panel.grid = element_blank(),
+    legend.direction = "vertical",
+    legend.position = c(1.125, .98),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10),
+    axis.text.y = element_text(size = 12),
+    plot.title = element_text(size = 14, face = "bold", hjust = 0)
+  )
+```
+
+* Compared to their prevalence in the overall US population, Democrats/leaning independents are **under-represented** among the unvaccinated--and even moreso in October than in April 2021.
+
+* Compared to their prevalence in the overall US population, Republicans/leaning independents are **over-represented** among the unvaccinated as of October, 2021.
+
+The original plot:
+
+![Who are the unvaccinated? Visualization from Washington Post](https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/PUP6SZ3SIZEGNPXBNVZ3SEEZ6Q.png&w=916)
+
+```{r}
+sessionInfo()
+```
+
