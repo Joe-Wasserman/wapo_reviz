@@ -1,5 +1,5 @@
 
-This is a quick re-visualization of a much-maligned plot from [the Washington Post](/README_files/PUP6SZ3SIZEGNPXBNVZ3SEEZ6Q.png){width=50%} using Kaiser Family Foundation polling data.
+This is a quick re-visualization of a much-maligned plot from [the Washington Post](https://www.washingtonpost.com/politics/2021/11/16/party-divide-vaccination/)using Kaiser Family Foundation polling data.
 
 
 ```r
